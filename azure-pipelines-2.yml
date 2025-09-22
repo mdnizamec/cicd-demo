@@ -28,21 +28,28 @@ stages:
         tags: |
           $(tag)
 
- 
-
 - stage: Dev
-  displayName: Build image
+  displayName: Deploy to Dev
   jobs:
-  - job: Build
-    displayName: Build
+  - job: DevJob
+    displayName: Dev Deployment
     pool:
       vmImage: ubuntu-latest
+    steps:
+    - script: echo "Dev deployment steps go here"
+      displayName: Placeholder for Dev steps
 
- 
 - stage: Prod
-  displayName: Build image
+  displayName: Deploy to Prod
   jobs:
-  - job: Build
-    displayName: Build
+  - job: ProdJob
+    displayName: Prod Deployment
     pool:
       vmImage: ubuntu-latest
+    steps:
+    - task: AzureAppServiceManage@0
+      displayName: Start Azure App Service
+      inputs:
+        azureSubscription: 'NizamS(cdabd22b-60cc-42ad-8636-0358c8697be6)'
+        action: 'Start Azure App Service'
+        WebAppName: 'webapp2'
