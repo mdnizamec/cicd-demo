@@ -35,11 +35,4 @@ stages:
     displayName: Staged
     pool:
       vmImage: ubuntu-latest
-    steps:
-    - task: Docker@2
-      displayName: Stage an image
-      inputs:
-        command: Stage
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-        tags: |
-          $(tag)
+ 
