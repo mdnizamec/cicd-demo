@@ -1,7 +1,3 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
 - main
 
@@ -29,18 +25,27 @@ stages:
           $(tag)
  
 - stage: Dev
-  displayName: Build image
+  displayName: Dev deployment
   jobs:
-  - job: Build
-    displayName: Build
+  - job: Dev
+    displayName: Dev
     pool:
       vmImage: ubuntu-latest
- 
-- stage: Prod
-  displayName: Build image
-  jobs:
-  - job: Build
-    displayName: Build
-    pool:
-      vmImage: ubuntu-latest
+    steps:
+    - script: echo "Add Dev deployment steps here"
 
+- stage: Prod
+  displayName: Prod deployment
+  jobs:
+  - job: Prod
+    displayName: Prod
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: AzureRmWebAppDeployment@5
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'NizamS(cdabd22b-60cc-42ad-8636-0358c8697be6)'
+        appType: 'webApp'
+        WebAppName: 'NDemoapp'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
