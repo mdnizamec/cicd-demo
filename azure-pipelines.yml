@@ -27,7 +27,7 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
-          stages:
+        
 - stage: Stage
   displayName: Stage image
   jobs:
@@ -35,4 +35,5 @@ stages:
     displayName: Staged
     pool:
       vmImage: ubuntu-latest
- 
+
+   
