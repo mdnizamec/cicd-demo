@@ -40,6 +40,6 @@ stages:
       displayName: Stage an image
       inputs:
         command: Stage
-        dockerfile: '$(Stage.SourcesDirectory)/Dockerfile'
+        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
