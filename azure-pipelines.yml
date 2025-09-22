@@ -36,4 +36,12 @@ stages:
     pool:
       vmImage: ubuntu-latest
 
+- stage: Production
+  displayName: Production image
+  jobs:
+  - job: Production
+    displayName: Production
+    pool:
+      vmImage: ubuntu-latest
+
    
