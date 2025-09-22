@@ -47,5 +47,5 @@ stages:
         ConnectionType: 'AzureRM'
         azureSubscription: 'NizamS(cdabd22b-60cc-42ad-8636-0358c8697be6)'
         appType: 'webApp'
-        WebAppName: 'NDemoapp'
+        WebAppName: 'webapp2'
         packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
