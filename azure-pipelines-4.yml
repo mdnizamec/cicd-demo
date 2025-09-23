@@ -1,16 +1,13 @@
-# Docker
-# Build a Docker image
-# https://docs.microsoft.com/azure/devops/pipelines/languages/docker
-
 trigger:
-- main
-
+  branches:
+    include:
+    - main
 resources:
-- repo: self
-
+  repositories:
+  - repository: self
 variables:
-  tag: '$(Build.BuildId)'
-
+- name: tag
+  value: '$(Build.BuildId)'
 stages:
 - stage: Build
   displayName: Build image
@@ -27,3 +24,30 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
         tags: |
           $(tag)
+- stage: Dev
+  displayName: Deploy to Dev
+  jobs:
+  - job: DevJob
+    displayName: Dev Deployment
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: CmdLine@2
+      displayName: Placeholder for Dev steps
+      inputs:
+        script: echo "Dev deployment steps go here"
+- stage: Prod
+  displayName: Deploy to Prod
+  jobs:
+  - job: ProdJob
+    displayName: Prod Deployment
+    pool:
+      vmImage: ubuntu-latest
+    steps:
+    - task: AzureRmWebAppDeployment@5
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'NizamS(cdabd22b-60cc-42ad-8636-0358c8697be6)'
+        appType: 'webApp'
+        WebAppName: 'webapp2'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
