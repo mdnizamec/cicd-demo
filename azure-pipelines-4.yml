@@ -44,10 +44,9 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    - task: AzureRmWebAppDeployment@5
+    - task: AzureAppServiceManage@0
+      displayName: Start Azure App Service
       inputs:
-        ConnectionType: 'AzureRM'
         azureSubscription: 'NizamS(cdabd22b-60cc-42ad-8636-0358c8697be6)'
-        appType: 'webApp'
+        action: 'Start Azure App Service'
         WebAppName: 'webapp2'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
